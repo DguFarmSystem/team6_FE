@@ -2,23 +2,25 @@
 
 .cardContainer {
     position: relative;
-    width: 250px; /* 카드의 너비 설정 */
-    height: 350px; /* 카드의 높이 설정 */
+    width: 250px; 
+    height: 350px; 
+    flex-shrink: 0; /* flex 컨테이너 내에서 크기가 줄어들지 않도록 */
     border-radius: 8px;
-    overflow: hidden; /* 이미지와 오버레이가 카드를 벗어나지 않도록 */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .cardContainer:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .poster {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 이미지가 잘리지 않고 카드를 꽉 채우도록 */
+    object-fit: cover; 
 }
 
 .infoOverlay {
@@ -26,8 +28,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    /* 투명한 검은색 배경으로 가독성 확보 */
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)); 
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9)); 
     padding: 15px;
     color: white;
 }
@@ -36,42 +37,43 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #ff4d4f; /* 눈에 띄는 빨간색 (알림 강조) */
+    background-color: #ff4d4f; /* 알림 강조 색상 */
     color: white;
-    padding: 4px 8px;
+    padding: 6px 10px;
     border-radius: 4px;
+    font-size: 1.1em;
     font-weight: bold;
-    z-index: 10; /* 포스터 위에 확실히 보이도록 */
+    z-index: 10; 
 }
 
 .title {
     font-size: 1.1em;
     font-weight: bold;
     margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* 제목이 길면 ...으로 표시 */
+}
+
+.platformText {
+    font-size: 0.9em;
+    opacity: 0.8;
 }
 
 .alarmButton {
-    /* 기본 알림 버튼 스타일 */
     margin-top: 10px;
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-weight: bold;
+    cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .alarmButton.interested {
-    /* 알림 설정 완료 상태 */
-    background-color: #52c41a; /* 초록색 */
+    background-color: #52c41a; /* 초록색: 설정 완료 */
     color: white;
 }
 
 .alarmButton.notInterested {
-    /* 알림 설정 전 상태 */
-    background-color: #1890ff; /* 파란색 */
+    background-color: #1890ff; /* 파란색: 알림 받기 */
     color: white;
 }

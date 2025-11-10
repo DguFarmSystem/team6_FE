@@ -1,8 +1,9 @@
 // src/components/PerformanceCard/PerformanceCard.tsx
 
 import React from 'react';
-import { PerformanceCardProps } from '@/types/Performance'; 
-import styles from './PerformanceCard.module.css'; // ✨ CSS 모듈 Import
+import { PerformanceCardProps } from '@/types/performance'; // 타입 import
+import { calculateDDay } from '@/utils/dateUtils'; // D-Day 로직 import
+import styles from './PerformanceCard.module.css'; // CSS 모듈 import
 
 const PerformanceCard: React.FC<PerformanceCardProps> = ({
   title,
@@ -11,28 +12,36 @@ const PerformanceCard: React.FC<PerformanceCardProps> = ({
   platforms,
   isInterested,
 }) => {
-  // TODO: 1. bookingStartDate를 이용해 D-Day 계산 로직 추가
-  // const dDay = calculateDDay(bookingStartDate);
-  const dDay = 'D-3'; // 임시 값
+  
+  const dDay = calculateDDay(bookingStartDate); 
+
+  // 알림 버튼 클릭 핸들러 (더미)
+  const handleAlarmToggle = () => {
+    console.log(`${title}의 알림 상태를 토글합니다.`);
+    // TODO: 여기에 실제 알림 상태를 변경하는 API 호출 로직이 들어갑니다.
+  };
 
   return (
-    <div className="card-container">
-      <img src={posterUrl} alt={title} className="poster" />
+    <div className={styles.cardContainer}>
+      <img src={posterUrl} alt={title} className={styles.poster} />
       
-      <div className="info-overlay">
-        {/* 🚨 D-Day 강조 영역 */}
-        <span className="d-day-badge">{dDay}</span> 
-        
-        <h3>{title}</h3>
+      {/* D-Day 뱃지 */}
+      <span className={styles.dDayBadge}>{dDay}</span> 
+      
+      <div className={styles.infoOverlay}>
+        <h3 className={styles.title}>{title}</h3>
         
         {/* 예매처 요약 정보 */}
-        <p>
+        <p className={styles.platformText}>
           {platforms[0]?.name} {platforms.length > 1 ? `외 ${platforms.length - 1}곳` : ''}
         </p>
         
-        {/* 🔔 알림 설정 버튼 */}
-        <button className={isInterested ? 'interested' : 'not-interested'}>
-          {isInterested ? '알림 설정 완료' : '알림 받기'}
+        {/* 알림 설정 버튼 */}
+        <button 
+          className={`${styles.alarmButton} ${isInterested ? styles.interested : styles.notInterested}`}
+          onClick={handleAlarmToggle}
+        >
+          {isInterested ? '🔔 알림 설정 완료' : '알림 받기'}
         </button>
       </div>
     </div>

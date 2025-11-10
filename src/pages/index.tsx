@@ -1,33 +1,30 @@
-// pages/index.tsx
+// src/pages/index.tsx
 
-import PerformanceCard from '../components/PerformanceCard/PerformanceCard';
-import { PerformanceCardProps } from '../types/Performance'; 
-
-// 임시 Mock 데이터
-const mockData: PerformanceCardProps = {
-  id: 'p001',
-  title: '오페라의 유령 (Phantom of the Opera)',
-  genre: '뮤지컬',
-  location: '블루스퀘어',
-  posterUrl: 'https://via.placeholder.com/300x400?text=Phantom+Poster', // 임시 이미지 URL
-  bookingStartDate: '2025-10-16T14:00:00',
-  platforms: [
-    { name: '인터파크', link: '#' },
-    { name: '멜론티켓', link: '#' },
-  ],
-  isInterested: false,
-};
+import Head from 'next/head';
+import Header from '@/components/Layout/Header'; // Header 컴포넌트가 있어야 함
+import UpcomingSales from '@/components/Home/UpcomingSales';
 
 export default function Home() {
   return (
-    <div>
-      <h1>공연 티켓 통합 알림 & 예매 가이드 플랫폼</h1>
-      <section>
-        <h2>놓치지 마세요! 곧 예매 오픈</h2>
-        {/* 실제로는 map 함수를 사용하여 여러 카드를 렌더링합니다 */}
-        <PerformanceCard {...mockData} />
-      </section>
-      {/* 여기에 다른 섹션 (예: 통합 검색) 추가 예정 */}
-    </div>
+    <>
+      <Head>
+        <title>통합 티켓 알림 | 공연 예매 가이드 플랫폼</title>
+        <meta name="description" content="모든 공연 예매 정보를 한 곳에서 확인하고 알림을 설정하세요." />
+      </Head>
+      
+      {/* 헤더 (검색바 포함) */}
+      <Header /> 
+      
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+        
+        {/* 곧 예매 오픈 섹션 */}
+        <UpcomingSales />
+        
+        {/* TODO: 나중에 인기 공연, 장르별 추천 섹션 등이 추가될 공간입니다. */}
+        
+      </main>
+      
+      {/* <footer>...</footer> */}
+    </>
   );
 }
